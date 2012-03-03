@@ -11,6 +11,11 @@ public class AllTestMembersTest {
 
     @Test
     public void shouldRunAllTestClasses() {
-        fail("Epic");
+
+    }
+
+    @Test
+    public void shouldRunAllTestsWithRecursiveRunner() {
+
     }
 }

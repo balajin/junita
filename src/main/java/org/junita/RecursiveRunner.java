@@ -8,6 +8,8 @@ import org.junita.core.TestClass;
 
 /**
  * @author : Balaji Narain
+ *
+ *  TODO: Currently does not support running individual tests.
  */
 public class RecursiveRunner extends Runner {
 

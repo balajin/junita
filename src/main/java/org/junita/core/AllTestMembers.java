@@ -22,6 +22,4 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
     public boolean run(TestClass testClass, RunNotifier notifier) throws Exception {
         return true;
     }
-
-
 }
