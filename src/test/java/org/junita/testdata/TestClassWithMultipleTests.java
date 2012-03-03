@@ -11,7 +11,7 @@ import static junit.framework.Assert.fail;
 /**
  * @author : Balaji Narain
  */
-@Ignore
+@RunWith(RecursiveRunner.class)
 public class TestClassWithMultipleTests {
 
     public void emptyMethod() {
@@ -39,11 +39,16 @@ public class TestClassWithMultipleTests {
     @EnclosedTest
     public class InnerTest {
 
-        public InnerTest() {
-        }
-
         @Test
         public void sample() {
+        }
+
+        @EnclosedTest
+        public class NestedTest {
+
+            @Test
+            public void sample() {
+            }
         }
     }
 }
