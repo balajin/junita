@@ -1,6 +1,7 @@
 package org.junita.core;
 
 import org.junit.Test;
+import org.junit.runner.Description;
 import org.junita.EnclosedTest;
 
 import java.lang.reflect.Field;
@@ -15,6 +16,19 @@ public class TestClass {
 
     public TestClass(Class<?> testClass) {
         this.testClass = testClass;
+    }
+
+    public Object newInstance() throws IllegalAccessException, InstantiationException {
+        return testClass.newInstance();
+    }
+
+    public Class clazz() {
+        return testClass;
+    }
+
+    public void describe(Description suiteDescription) {
+        allTestMethods().describe(suiteDescription, clazz());
+        allTestMembers().describe(suiteDescription, clazz());
     }
 
     public AllTestMethods allTestMethods() {
@@ -35,13 +49,5 @@ public class TestClass {
             }
         }
         return allTestMembers;
-    }
-
-    public Object newInstance() throws IllegalAccessException, InstantiationException {
-        return testClass.newInstance();
-    }
-
-    public Class clazz() {
-        return testClass;
     }
 }

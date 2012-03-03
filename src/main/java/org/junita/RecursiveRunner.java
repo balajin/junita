@@ -2,6 +2,8 @@ package org.junita;
 
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
+import org.junit.runner.manipulation.Filter;
+import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.notification.RunNotifier;
 import org.junita.core.TargetAggregate;
 import org.junita.core.TestClass;
@@ -23,7 +25,9 @@ public class RecursiveRunner extends Runner {
 
     @Override
     public Description getDescription() {
-        return Description.createSuiteDescription(testClass.clazz());
+        Description suiteDescription = Description.createSuiteDescription(testClass.clazz());
+        testClass.describe(suiteDescription);
+        return suiteDescription;
     }
 
     @Override

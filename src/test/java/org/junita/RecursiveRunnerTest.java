@@ -43,6 +43,12 @@ public class RecursiveRunnerTest {
     }
 
     @Test
+    public void shouldDescribeUnitUnderTest() {
+        recursiveRunner.getDescription();
+        verify(testClass).describe(any(Description.class));
+    }
+
+    @Test
     public void shouldRunAllTestMethods() throws Exception {
         when(allTestMethods.isNotEmpty()).thenReturn(true);
         recursiveRunner.run(notifier);

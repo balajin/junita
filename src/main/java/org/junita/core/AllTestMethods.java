@@ -3,7 +3,6 @@ package org.junita.core;
 
 import org.junit.Ignore;
 import org.junit.runner.Description;
-import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
@@ -24,6 +23,13 @@ public class AllTestMethods extends TargetAggregate<Method> {
 
     public AllTestMethods(TargetProxy targetProxy) {
         this.targetProxy = targetProxy;
+    }
+
+    @Override
+    public void describe(Description suiteDescription, Class clazz) {
+        for (Method method : testTargets) {
+            suiteDescription.addChild(Description.createTestDescription(clazz, method.getName()));
+        }
     }
 
     @Override

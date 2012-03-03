@@ -1,5 +1,6 @@
 package org.junita.core;
 
+import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 
 import java.lang.reflect.InvocationTargetException;
@@ -35,4 +36,6 @@ public abstract class TargetAggregate<T> {
     }
 
     public abstract boolean run(TestClass o, RunNotifier notifier) throws Exception;
+
+    public abstract void describe(Description suiteDescription, Class clazz);
 }
