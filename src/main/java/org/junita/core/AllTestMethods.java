@@ -34,12 +34,18 @@ public class AllTestMethods extends TargetAggregate<Method> {
 
     @Override
     public boolean run(TestClass o, RunNotifier notifier) throws Exception {
+        Object instance = o.newInstance();
+        return run(o, instance, notifier);
+    }
+
+    @Override
+    public boolean run(TestClass o, Object instance, RunNotifier notifier) throws Exception {
         for (Method method : testTargets) {
             Description description = Description.createTestDescription(o.clazz(), method.getName());
             if (notIgnored(method)) {
                 notifier.fireTestStarted(description);
                 try {
-                    targetProxy.invokeMethod(method, o.newInstance());
+                    targetProxy.invokeMethod(method, instance);
                 } catch (InvocationTargetException e) {
                     notifier.fireTestFailure(new Failure(description, e));
                 }

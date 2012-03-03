@@ -33,7 +33,7 @@ public class TestClassTest {
     @Test
     public void shouldReturnAllTestMethodsOfAClass() {
         testClass = new TestClass(TestClassWithMultipleTests.class);
-        assertEquals(2, testClass.allTestMethods().size());
+        assertEquals(1, testClass.allTestMethods().size());
     }
 
     @Test

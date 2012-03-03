@@ -18,4 +18,9 @@ public class AllTestMembersTest {
     public void shouldRunAllTestsWithRecursiveRunner() {
 
     }
+
+    @Test
+    public void shouldRunAllTestsWithTheSameInstance() {
+
+    }
 }
