@@ -11,7 +11,6 @@ import org.junita.core.TestClass;
 import org.junita.testdata.TestClassWithMultipleTests;
 import org.mockito.Mock;
 
-import static junit.framework.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

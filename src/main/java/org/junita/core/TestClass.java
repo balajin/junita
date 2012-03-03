@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.junit.runner.Description;
 import org.junita.EnclosedTest;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**

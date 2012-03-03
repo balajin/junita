@@ -3,11 +3,9 @@ package org.junita.core;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
-import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junita.testdata.TestClassWithMultipleTests;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,9 +13,7 @@ import java.lang.reflect.Method;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 /**

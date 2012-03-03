@@ -4,9 +4,7 @@ import org.junit.Test;
 import org.junita.testdata.TestClassWithMultipleTests;
 import org.junita.testdata.TestClassWithNoTests;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 /**
  * @author : Balaji Narain

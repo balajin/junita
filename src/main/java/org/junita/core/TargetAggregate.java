@@ -3,7 +3,6 @@ package org.junita.core;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
