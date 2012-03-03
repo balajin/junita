@@ -6,8 +6,6 @@ import org.junit.runner.notification.RunNotifier;
 import org.junita.core.TargetAggregate;
 import org.junita.core.TestClass;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * @author : Balaji Narain
  */
@@ -25,22 +23,21 @@ public class RecursiveRunner extends Runner {
 
     @Override
     public Description getDescription() {
-        return null;
+        return Description.createSuiteDescription(testClass.clazz());
     }
 
     @Override
     public void run(RunNotifier notifier) {
-        run(testClass.allTestMethods(), notifier);
-        run(testClass.allTestMembers(), notifier);
+        try {
+            run(testClass.allTestMethods(), notifier);
+            run(testClass.allTestMembers(), notifier);
+        } catch (Exception e) {
+        }
     }
 
-    private void run(TargetAggregate allTargets, RunNotifier notifier) {
+    private void run(TargetAggregate allTargets, RunNotifier notifier) throws Exception {
         if (allTargets.isNotEmpty()) {
-            try {
-                allTargets.run(testClass, notifier);
-            } catch (Exception e) {
-
-            }
+            allTargets.run(testClass, notifier);
         }
     }
 }

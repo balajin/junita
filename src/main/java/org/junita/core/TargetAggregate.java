@@ -22,7 +22,7 @@ public abstract class TargetAggregate<T> {
     }
 
     public boolean isEmpty() {
-        return true;
+        return testTargets.isEmpty();
     }
 
     public int size() {
@@ -34,5 +34,5 @@ public abstract class TargetAggregate<T> {
         return this;
     }
 
-    public abstract void run(TestClass o, RunNotifier notifier) throws IllegalAccessException, InstantiationException, InvocationTargetException;
+    public abstract boolean run(TestClass o, RunNotifier notifier) throws Exception;
 }

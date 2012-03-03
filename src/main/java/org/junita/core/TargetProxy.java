@@ -9,7 +9,8 @@ import java.lang.reflect.Method;
  */
 public class TargetProxy {
 
-    public void invokeMethod(Method method, Object instance) throws InvocationTargetException, IllegalAccessException {
+    public boolean invokeMethod(Method method, Object instance) throws InvocationTargetException, IllegalAccessException {
         method.invoke(instance);
+        return true;
     }
 }

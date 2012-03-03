@@ -12,7 +12,8 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
         super();
     }
 
-    public void run(TestClass testClass, RunNotifier notifier) {
-
+    @Override
+    public boolean run(TestClass testClass, RunNotifier notifier) throws Exception {
+        return true;
     }
 }

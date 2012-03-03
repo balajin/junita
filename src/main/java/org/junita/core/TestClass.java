@@ -40,4 +40,8 @@ public class TestClass {
     public Object newInstance() throws IllegalAccessException, InstantiationException {
         return testClass.newInstance();
     }
+
+    public Class clazz() {
+        return testClass;
+    }
 }

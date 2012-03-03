@@ -1,6 +1,10 @@
 package org.junita.core;
 
 
+import org.junit.Ignore;
+import org.junit.runner.Description;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,13 +26,26 @@ public class AllTestMethods extends TargetAggregate<Method> {
         this.targetProxy = targetProxy;
     }
 
-    public void run(TestClass o, RunNotifier notifier)
-            throws IllegalAccessException,
-            InstantiationException,
-            InvocationTargetException {
-
+    @Override
+    public boolean run(TestClass o, RunNotifier notifier) throws Exception {
         for (Method method : testTargets) {
-            targetProxy.invokeMethod(method, o.newInstance());
+            Description description = Description.createTestDescription(o.clazz(), method.getName());
+            if (notIgnored(method)) {
+                notifier.fireTestStarted(description);
+                try {
+                    targetProxy.invokeMethod(method, o.newInstance());
+                } catch (InvocationTargetException e) {
+                    notifier.fireTestFailure(new Failure(description, e));
+                }
+            } else {
+                notifier.fireTestIgnored(description);
+            }
+            notifier.fireTestFinished(Description.createTestDescription(o.clazz(), method.getName()));
         }
+        return true;
+    }
+
+    private boolean notIgnored(Method method) {
+        return !method.isAnnotationPresent(Ignore.class);
     }
 }
