@@ -12,6 +12,14 @@ import org.junita.model.AllTestMethods;
 import java.lang.reflect.Method;
 
 /**
+ * Models a class under test.
+ *
+ * Is an aggregate of
+ *
+ *      1. All test methods
+ *      2. All test members - Enclosed tests
+ *      3. All data modifiers - Setup and Teardown methods
+ *
  * @author : Balaji Narain
  */
 public class TestClass {

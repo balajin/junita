@@ -6,6 +6,9 @@ import org.junit.runner.notification.RunNotifier;
 import org.junita.model.TargetAggregate;
 
 /**
+ *
+ * The runner that has to be used to run enclosed tests.
+ *
  * The Intention was to decorate TestClass with this class. But thanks to jUnit making Runner a class,
  * this is not possible
  *

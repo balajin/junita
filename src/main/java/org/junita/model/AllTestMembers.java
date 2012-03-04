@@ -8,6 +8,8 @@ import org.junita.core.Enclosure;
 import org.junita.core.TestClass;
 
 /**
+ * A collection of all enclosed tests
+ *
  * @author : Balaji Narain
  */
 public class AllTestMembers extends TargetAggregate<Class<?>> {

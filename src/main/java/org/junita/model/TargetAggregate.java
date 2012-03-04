@@ -5,6 +5,11 @@ import org.junit.runner.notification.RunNotifier;
 import org.junita.core.TestClass;
 
 /**
+ * A collection of testable entities viz.
+ *
+ *      1. Test methods
+ *      2. Enclosed tests
+ *
  * @author : Balaji Narain
  */
 public abstract class TargetAggregate<T> extends AggregateOfInvokables<T> {

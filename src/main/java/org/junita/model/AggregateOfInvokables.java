@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * A collection of either of the following three
+ *
+ *  1. Test methods
+ *  2. Enclosed Tess
+ *  3. Data Modifiers
+ *
  * @author : Balaji Narain
  */
 public class AggregateOfInvokables<T> {

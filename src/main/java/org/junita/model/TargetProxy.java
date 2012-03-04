@@ -5,6 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
+ * A utility to simplify mocking.
+ *
+ *   Method class is final, and it cannot be mocked.
+ *
  * @author : Balaji Narain
  */
 public class TargetProxy {

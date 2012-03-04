@@ -12,6 +12,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
+ * A collection of all test methods
+ *
  * @author : Balaji Narain
  */
 public class AllTestMethods extends TargetAggregate<Method> {

@@ -5,3 +5,7 @@
 3. The source code for junita lives under https://github.com/balajin/junita
 
 4. junita is licensed under COMMON PUBLIC LICENSE v 1.0, a copy of which can be found in the source root
+
+5. The class to start with when reading the code is Enclosure inside the file Enclosure.java
+
+6. Take a look at TestClassWithMultipleTests.java for a sample usage of the enclosed tests

@@ -6,6 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
+ * A collection of set up and tear down methods
+ *
  * @author : Balaji Narain
  */
 public class AllDataModifiers extends AggregateOfInvokables<Method> {
