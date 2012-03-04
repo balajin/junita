@@ -35,9 +35,11 @@ public class EnclosureTest {
     private Enclosure enclosure;
 
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         initMocks(this);
         when(testClass.clazz()).thenReturn(TestClassWithMultipleTests.class);
+        when(testClass.newInstance()).thenReturn(new TestClassWithMultipleTests());
+
         enclosure = new Enclosure(testClass);
         when(testClass.allTestMethods()).thenReturn(allTestMethods);
         when(testClass.allTestMembers()).thenReturn(allTestMembers);

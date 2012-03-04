@@ -39,6 +39,7 @@ public class AllTestMembersTest {
     public void setup() {
         initMocks(this);
         allTestMembers = new AllTestMembers(enclosure);
+        when(enclosingClass.clazz()).thenReturn(TestClassWithMultipleTests.class);
     }
 
     @Test
@@ -56,7 +57,7 @@ public class AllTestMembersTest {
         when(enclosingClass.newInstance()).thenReturn(new TestClassWithMultipleTests());
 
         allTestMembers.run(enclosingClass, notifier);
-        verify(enclosure, times(1)).run(anyObject(), same(notifier));
+        verify(enclosure, times(1)).run(same(notifier));
     }
 
     @Test

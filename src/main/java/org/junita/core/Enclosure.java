@@ -45,19 +45,5 @@ public class Enclosure extends Runner {
             allTargets.run(testClass, notifier);
         }
     }
-
-    public void run(Object instance, RunNotifier notifier) {
-        try {
-            run(testClass.allTestMethods(), instance, notifier);
-            run(testClass.allTestMembers(), instance, notifier);
-        } catch (Exception e) {
-        }
-    }
-
-    private void run(TargetAggregate allTargets, Object instance, RunNotifier notifier) throws Exception {
-        if (allTargets.isNotEmpty()) {
-            allTargets.run(testClass, instance, notifier);
-        }
-    }
 }
 

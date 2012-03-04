@@ -5,7 +5,6 @@ import org.junit.Ignore;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
-import org.junita.core.TestClass;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -34,42 +33,20 @@ public class AllTestMethods extends TargetAggregate<Method> {
     }
 
     @Override
-    public boolean run(TestClass rootClass, RunNotifier notifier) throws Exception {
-        for (Method method : invokables) {
-            Description description = Description.createTestDescription(rootClass.clazz(), method.getName());
-            if (notIgnored(method)) {
-                Object instance = rootClass.newInstance();
-                notifier.fireTestStarted(description);
-                try {
-                    targetProxy.invokeMethod(method, instance);
-                } catch (InvocationTargetException e) {
-                    notifier.fireTestFailure(new Failure(description, e));
-                }
-                rootClass.destroy(instance);
-            } else {
-                notifier.fireTestIgnored(description);
+    public boolean run(Method method, Object instance, Description description, RunNotifier notifier) throws Exception {
+        Description testDescription = Description.createTestDescription(instance.getClass(), method.getName());
+        description.addChild(testDescription);
+        if (notIgnored(method)) {
+            notifier.fireTestStarted(testDescription);
+            try {
+                targetProxy.invokeMethod(method, instance);
+            } catch (InvocationTargetException e) {
+                notifier.fireTestFailure(new Failure(testDescription, e));
             }
-            notifier.fireTestFinished(Description.createTestDescription(rootClass.clazz(), method.getName()));
+        } else {
+            notifier.fireTestIgnored(testDescription);
         }
-        return true;
-    }
-
-    @Override
-    public boolean run(TestClass innerClass, Object enclosingInstance, RunNotifier notifier) throws Exception {
-        for (Method method : invokables) {
-            Description description = Description.createTestDescription(innerClass.clazz(), method.getName());
-            if (notIgnored(method)) {
-                notifier.fireTestStarted(description);
-                try {
-                    targetProxy.invokeMethod(method, enclosingInstance);
-                } catch (InvocationTargetException e) {
-                    notifier.fireTestFailure(new Failure(description, e));
-                }
-            } else {
-                notifier.fireTestIgnored(description);
-            }
-            notifier.fireTestFinished(Description.createTestDescription(innerClass.clazz(), method.getName()));
-        }
+        notifier.fireTestFinished(testDescription);
         return true;
     }
 

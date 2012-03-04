@@ -31,19 +31,12 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
     }
 
     @Override
-    public boolean run(TestClass enclosingClass, RunNotifier notifier) throws Exception {
-        Object instance = enclosingClass.newInstance();
-        boolean result = run(enclosingClass, instance, notifier);
-        enclosingClass.destroy(instance);
-        return result;
-    }
-
-    @Override
-    public boolean run(TestClass testClass, Object instance, RunNotifier notifier) throws Exception {
+    public boolean run(Class<?> innerClass, Object enclosingInstance, Description description, RunNotifier notifier) throws Exception {
         for (Class<?> target : invokables) {
-            TestClass innerTest = new TestClass(target);
-            Object newInnerInstance = innerTest.newInstance(instance);
-            enclosure(innerTest).run(newInnerInstance, notifier);
+            description.addChild(Description.createSuiteDescription(innerClass));
+            TestClass innerTest = new TestClass(target, enclosingInstance);
+            Object newInnerInstance = innerTest.newInstance();
+            enclosure(innerTest).run(notifier);
             innerTest.destroy(newInnerInstance);
         }
         return true;

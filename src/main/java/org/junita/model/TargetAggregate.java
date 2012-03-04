@@ -12,10 +12,18 @@ import java.util.List;
  */
 public abstract class TargetAggregate<T> extends AggregateOfInvokables<T> {
 
+    public boolean run(TestClass o, RunNotifier notifier) throws Exception {
+        boolean result = true;
+        for (T invokable : invokables) {
+            Description description = Description.createSuiteDescription(o.clazz());
+            Object instance = o.newInstance();
+            result &= run(invokable, instance, description, notifier);
+            o.destroy(instance);
+        }
+        return result;
+    }
 
-    public abstract boolean run(TestClass o, RunNotifier notifier) throws Exception;
-
-    public abstract boolean run(TestClass testClass, Object instance, RunNotifier notifier) throws Exception;
+    public abstract boolean run(T invokable, Object instance, Description description, RunNotifier notifier) throws Exception;
 
     public abstract void describe(Description suiteDescription, Class clazz);
 }

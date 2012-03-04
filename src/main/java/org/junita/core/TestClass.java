@@ -17,19 +17,24 @@ import java.lang.reflect.Method;
 public class TestClass {
 
     private Class<?> testClass;
+    private Object enclosingInstance;
 
     public TestClass(Class<?> testClass) {
         this.testClass = testClass;
     }
 
-    public Object newInstance() throws Exception {
-        Object instance = testClass.newInstance();
-        allDataModifiers(Before.class).applyOn(instance);
-        return instance;
+    public TestClass(Class<?> testClass, Object enclosingInstance) {
+        this(testClass);
+        this.enclosingInstance = enclosingInstance;
     }
 
-    public Object newInstance(Object enclosingObject) throws Exception {
-        Object instance = testClass.getConstructor(enclosingObject.getClass()).newInstance(enclosingObject);
+    public Object newInstance() throws Exception {
+        Object instance = null;
+        if (enclosingInstance == null) {
+            instance = testClass.newInstance();
+        } else {
+            instance = testClass.getConstructor(enclosingInstance.getClass()).newInstance(enclosingInstance);
+        }
         allDataModifiers(Before.class).applyOn(instance);
         return instance;
     }
