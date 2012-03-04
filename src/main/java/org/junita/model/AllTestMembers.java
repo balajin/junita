@@ -35,9 +35,7 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
         for (Class<?> target : invokables) {
             description.addChild(Description.createSuiteDescription(innerClass));
             TestClass innerTest = new TestClass(target, enclosingInstance);
-            Object newInnerInstance = innerTest.newInstance();
             enclosure(innerTest).run(notifier);
-            innerTest.destroy(newInnerInstance);
         }
         return true;
     }
