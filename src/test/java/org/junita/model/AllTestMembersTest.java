@@ -58,4 +58,13 @@ public class AllTestMembersTest {
         allTestMembers.run(enclosingClass, notifier);
         verify(enclosure, times(1)).run(anyObject(), same(notifier));
     }
+
+    @Test
+    public void shouldDestroyTheInstanceAfterTest() throws Exception {
+        allTestMembers.add(enclosedTest);
+        when(enclosingClass.newInstance()).thenReturn(new TestClassWithMultipleTests());
+
+        allTestMembers.run(enclosingClass, notifier);
+        verify(enclosingClass).destroy(anyObject());
+    }
 }

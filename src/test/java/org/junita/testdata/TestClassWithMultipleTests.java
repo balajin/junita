@@ -1,5 +1,7 @@
 package org.junita.testdata;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +18,14 @@ public class TestClassWithMultipleTests {
 
     public void emptyMethod() {
 
+    }
+
+    @Before
+    public void setup() {
+    }
+
+    @Before
+    public void anotherSetup() {
     }
 
     @Ignore
@@ -36,11 +46,26 @@ public class TestClassWithMultipleTests {
         }
     }
 
+    @Test
+    public void anotherTestMethod(){
+
+    }
+
     @EnclosedTest
     public class InnerTest {
 
+        @Before
+        public void innerSetup() {
+
+        }
+
         @Test
         public void sample() {
+        }
+
+        @Test
+        public void anotherTest() {
+
         }
 
         @EnclosedTest
@@ -50,5 +75,20 @@ public class TestClassWithMultipleTests {
             public void sample() {
             }
         }
+
+        @After
+        public void innerTearDown() {
+
+        }
+    }
+
+    @After
+    public void tearDown() {
+
+    }
+
+    @After
+    public void anotherTearDown() {
+
     }
 }

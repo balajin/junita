@@ -23,28 +23,33 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
 
     @Override
     public void describe(Description suiteDescription, Class clazz) {
-        for (Class<?> target : testTargets) {
-            Description description = enclosure(target).getDescription();
+        for (Class<?> target : invokables) {
+            TestClass innerTest = new TestClass(target);
+            Description description = enclosure(innerTest).getDescription();
             suiteDescription.addChild(description);
         }
     }
 
     @Override
-    public boolean run(TestClass testClass, RunNotifier notifier) throws Exception {
-        Object instance = testClass.newInstance();
-        return run(testClass, instance, notifier);
+    public boolean run(TestClass enclosingClass, RunNotifier notifier) throws Exception {
+        Object instance = enclosingClass.newInstance();
+        boolean result = run(enclosingClass, instance, notifier);
+        enclosingClass.destroy(instance);
+        return result;
     }
 
     @Override
     public boolean run(TestClass testClass, Object instance, RunNotifier notifier) throws Exception {
-        for (Class<?> target : testTargets) {
-            Object newInnerInstance = target.getConstructor(instance.getClass()).newInstance(instance);
-            enclosure(target).run(newInnerInstance, notifier);
+        for (Class<?> target : invokables) {
+            TestClass innerTest = new TestClass(target);
+            Object newInnerInstance = innerTest.newInstance(instance);
+            enclosure(innerTest).run(newInnerInstance, notifier);
+            innerTest.destroy(newInnerInstance);
         }
         return true;
     }
 
-    private Enclosure enclosure(Class<?> target) {
+    private Enclosure enclosure(TestClass target) {
         if (enclosure != null)
             return enclosure;
         return new Enclosure(target);

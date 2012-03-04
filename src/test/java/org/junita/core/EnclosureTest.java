@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
+import org.junita.model.AllDataModifiers;
 import org.junita.model.AllTestMembers;
 import org.junita.model.AllTestMethods;
 import org.junita.testdata.TestClassWithMultipleTests;
@@ -25,10 +26,12 @@ public class EnclosureTest {
     @Mock
     private AllTestMethods allTestMethods;
     @Mock
+    private AllDataModifiers allDataModifiers;
+    @Mock
     private AllTestMembers allTestMembers;
+
     @Mock
     private RunNotifier notifier;
-
     private Enclosure enclosure;
 
     @Before

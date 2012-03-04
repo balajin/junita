@@ -1,10 +1,14 @@
 package org.junita.core;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
+import org.junita.model.AllDataModifiers;
 import org.junita.model.AllTestMembers;
 import org.junita.model.AllTestMethods;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -18,8 +22,20 @@ public class TestClass {
         this.testClass = testClass;
     }
 
-    public Object newInstance() throws IllegalAccessException, InstantiationException {
-        return testClass.newInstance();
+    public Object newInstance() throws Exception {
+        Object instance = testClass.newInstance();
+        allDataModifiers(Before.class).applyOn(instance);
+        return instance;
+    }
+
+    public Object newInstance(Object enclosingObject) throws Exception {
+        Object instance = testClass.getConstructor(enclosingObject.getClass()).newInstance(enclosingObject);
+        allDataModifiers(Before.class).applyOn(instance);
+        return instance;
+    }
+
+    public void destroy(Object instance) throws Exception {
+        allDataModifiers(After.class).applyOn(instance);
     }
 
     public Class clazz() {
@@ -49,5 +65,15 @@ public class TestClass {
             }
         }
         return allTestMembers;
+    }
+
+    AllDataModifiers allDataModifiers(Class annotation) {
+        AllDataModifiers allDataModifiers = new AllDataModifiers();
+        for (Method method : testClass.getMethods()) {
+            if (method.isAnnotationPresent(annotation)) {
+                allDataModifiers.add(method);
+            }
+        }
+        return allDataModifiers;
     }
 }
