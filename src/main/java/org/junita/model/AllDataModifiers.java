@@ -1,5 +1,7 @@
 package org.junita.model;
 
+import org.junita.core.TestClass;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -12,6 +14,15 @@ public class AllDataModifiers extends AggregateOfInvokables<Method> {
 
     public AllDataModifiers() {
         this(new TargetProxy());
+    }
+
+    public AllDataModifiers(TestClass testClass, Class annotation) {
+        this();
+        for (Method method : testClass.clazz().getMethods()) {
+            if (method.isAnnotationPresent(annotation)) {
+                this.add(method);
+            }
+        }
     }
 
     public AllDataModifiers(TargetProxy targetProxy) {

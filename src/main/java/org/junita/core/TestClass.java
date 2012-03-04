@@ -53,32 +53,14 @@ public class TestClass {
     }
 
     AllTestMethods allTestMethods() {
-        return (AllTestMethods) findMethods(new AllTestMethods(), Test.class);
+        return new AllTestMethods(this);
     }
 
     AllTestMembers allTestMembers() {
-        return (AllTestMembers) findClasses(new AllTestMembers(), EnclosedTest.class);
+        return new AllTestMembers(this);
     }
 
     AllDataModifiers allDataModifiers(Class annotation) {
-        return (AllDataModifiers) findMethods(new AllDataModifiers(), annotation);
-    }
-
-    AggregateOfInvokables findMethods(AggregateOfInvokables instance, Class annotation) {
-        for (Method method : testClass.getMethods()) {
-            if (method.isAnnotationPresent(annotation)) {
-                instance.add(method);
-            }
-        }
-        return instance;
-    }
-
-    AggregateOfInvokables findClasses(AggregateOfInvokables instance, Class annotation) {
-        for (Class clazz : testClass.getClasses()) {
-            if (clazz.isAnnotationPresent(annotation)) {
-                instance.add(clazz);
-            }
-        }
-        return instance;
+        return new AllDataModifiers(this, annotation);
     }
 }

@@ -3,6 +3,7 @@ package org.junita.model;
 
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
+import org.junita.core.EnclosedTest;
 import org.junita.core.Enclosure;
 import org.junita.core.TestClass;
 
@@ -15,6 +16,14 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
 
     public AllTestMembers() {
         super();
+    }
+
+    public AllTestMembers(TestClass testClass) {
+        for (Class clazz : testClass.clazz().getClasses()) {
+            if (clazz.isAnnotationPresent(EnclosedTest.class)) {
+                this.add(clazz);
+            }
+        }
     }
 
     public AllTestMembers(Enclosure enclosure) {

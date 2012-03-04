@@ -2,9 +2,11 @@ package org.junita.model;
 
 
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
+import org.junita.core.TestClass;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,6 +21,15 @@ public class AllTestMethods extends TargetAggregate<Method> {
     public AllTestMethods() {
         super();
         targetProxy = new TargetProxy();
+    }
+
+    public AllTestMethods(TestClass testClass) {
+        this();
+        for (Method method : testClass.clazz().getMethods()) {
+            if (method.isAnnotationPresent(Test.class)) {
+                this.add(method);
+            }
+        }
     }
 
     public AllTestMethods(TargetProxy targetProxy) {
