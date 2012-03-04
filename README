@@ -18,3 +18,21 @@ Information
 8. Comments and questions can be sent to narainbalaji[attherate[at]][GmAil][dot[.]]com
 
 9. It will be helpful is such queries had the word junita in the subject
+
+10. Improvements may be sent in through github pull requests.
+
+Boot Strap
+----------
+To quickly start using junita, you need to
+
+1. Install apache-maven
+
+2. Add jUnit to your class path
+
+3. Install git and checkout junita
+
+4. cd <your_junita_home>; mvn clean package
+
+5. Add the resulting jar to your classpath
+
+6. Play around with it
