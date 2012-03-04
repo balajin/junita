@@ -11,14 +11,20 @@ import org.junita.core.TestClass;
  */
 public class AllTestMembers extends TargetAggregate<Class<?>> {
 
+    private Enclosure enclosure;
+
     public AllTestMembers() {
         super();
+    }
+
+    public AllTestMembers(Enclosure enclosure) {
+        this.enclosure = enclosure;
     }
 
     @Override
     public void describe(Description suiteDescription, Class clazz) {
         for (Class<?> target : testTargets) {
-            Description description = new Enclosure(target).getDescription();
+            Description description = enclosure(target).getDescription();
             suiteDescription.addChild(description);
         }
     }
@@ -33,8 +39,14 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
     public boolean run(TestClass testClass, Object instance, RunNotifier notifier) throws Exception {
         for (Class<?> target : testTargets) {
             Object newInnerInstance = target.getConstructor(instance.getClass()).newInstance(instance);
-            new Enclosure(target).run(newInnerInstance, notifier);
+            enclosure(target).run(newInnerInstance, notifier);
         }
         return true;
+    }
+
+    private Enclosure enclosure(Class<?> target) {
+        if (enclosure != null)
+            return enclosure;
+        return new Enclosure(target);
     }
 }

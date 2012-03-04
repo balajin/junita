@@ -1,26 +1,61 @@
 package org.junita.model;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.Description;
+import org.junit.runner.notification.RunNotifier;
+import org.junita.core.Enclosure;
+import org.junita.core.TestClass;
+import org.junita.testdata.TestClassWithMultipleTests;
+import org.mockito.Mock;
 
 import static junit.framework.Assert.fail;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.same;
+import static org.mockito.Mockito.*;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 /**
  * @author : Balaji Narain
  */
 public class AllTestMembersTest {
 
-    @Test
-    public void shouldRunAllTestClasses() {
+    @Mock
+    private Enclosure enclosure;
+    @Mock
+    private RunNotifier notifier;
+    @Mock
+    private TestClass enclosingClass;
 
+    private Class<?> enclosedTest;
+    private AllTestMembers allTestMembers;
+
+    public AllTestMembersTest() {
+        enclosedTest = TestClassWithMultipleTests.InnerTest.class;
+    }
+
+    @Before
+    public void setup() {
+        initMocks(this);
+        allTestMembers = new AllTestMembers(enclosure);
     }
 
     @Test
-    public void shouldRunAllTestsWithRecursiveRunner() {
+    public void shouldDescribeTheEnclosedTest() {
+        Description suiteDescription = mock(Description.class);
+        allTestMembers.add(enclosedTest);
 
+        allTestMembers.describe(suiteDescription, TestClassWithMultipleTests.class);
+        verify(suiteDescription, times(1)).addChild(any(Description.class));
     }
 
     @Test
-    public void shouldRunAllTestsWithTheSameInstance() {
+    public void shouldRecursivelyRunEnclosedTest() throws Exception {
+        allTestMembers.add(enclosedTest);
+        when(enclosingClass.newInstance()).thenReturn(new TestClassWithMultipleTests());
 
+        allTestMembers.run(enclosingClass, notifier);
+        verify(enclosure, times(1)).run(anyObject(), same(notifier));
     }
 }
