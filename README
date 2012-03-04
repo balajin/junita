@@ -23,6 +23,7 @@ Information
 
 Boot Strap
 ----------
+
 To quickly start using junita, you need to
 
 1. Install apache-maven
@@ -36,3 +37,8 @@ To quickly start using junita, you need to
 5. Add the resulting jar to your classpath
 
 6. Play around with it
+
+CAUTION
+-------
+
+junita is pretty new, and extensive testing has not been done. Infact so far, only preliminary testing has been done with the IntelliJ IDE. It is NOT TESTED with other enviroments like eclipse, ant etc. 
