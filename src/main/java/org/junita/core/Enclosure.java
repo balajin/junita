@@ -6,9 +6,11 @@ import org.junit.runner.notification.RunNotifier;
 import org.junita.model.TargetAggregate;
 
 /**
- * @author : Balaji Narain
+ * The Intention was to decorate TestClass with this class. But thanks to jUnit making Runner a class,
+ * this is not possible
  *
- *   TODO: Currently does not support running individual tests.
+ * @author : Balaji Narain
+ *         TODO: Currently does not support running individual tests.
  */
 public class Enclosure extends Runner {
 
@@ -38,6 +40,12 @@ public class Enclosure extends Runner {
         }
     }
 
+    private void run(TargetAggregate allTargets, RunNotifier notifier) throws Exception {
+        if (allTargets.isNotEmpty()) {
+            allTargets.run(testClass, notifier);
+        }
+    }
+
     public void run(Object instance, RunNotifier notifier) {
         try {
             run(testClass.allTestMethods(), instance, notifier);
@@ -49,12 +57,6 @@ public class Enclosure extends Runner {
     private void run(TargetAggregate allTargets, Object instance, RunNotifier notifier) throws Exception {
         if (allTargets.isNotEmpty()) {
             allTargets.run(testClass, instance, notifier);
-        }
-    }
-
-    private void run(TargetAggregate allTargets, RunNotifier notifier) throws Exception {
-        if (allTargets.isNotEmpty()) {
-            allTargets.run(testClass, notifier);
         }
     }
 }
