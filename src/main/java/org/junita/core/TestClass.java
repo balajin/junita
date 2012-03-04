@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
+import org.junita.model.AggregateOfInvokables;
 import org.junita.model.AllDataModifiers;
 import org.junita.model.AllTestMembers;
 import org.junita.model.AllTestMethods;
@@ -52,32 +53,32 @@ public class TestClass {
     }
 
     AllTestMethods allTestMethods() {
-        AllTestMethods allTestMethods = new AllTestMethods();
-        for (Method method : testClass.getMethods()) {
-            if (method.isAnnotationPresent(Test.class)) {
-                allTestMethods.add(method);
-            }
-        }
-        return allTestMethods;
+        return (AllTestMethods) findMethods(new AllTestMethods(), Test.class);
     }
 
     AllTestMembers allTestMembers() {
-        AllTestMembers allTestMembers = new AllTestMembers();
-        for (Class innerClass : testClass.getClasses()) {
-            if (innerClass.isAnnotationPresent(EnclosedTest.class)) {
-                allTestMembers.add(innerClass);
-            }
-        }
-        return allTestMembers;
+        return (AllTestMembers) findClasses(new AllTestMembers(), EnclosedTest.class);
     }
 
     AllDataModifiers allDataModifiers(Class annotation) {
-        AllDataModifiers allDataModifiers = new AllDataModifiers();
+        return (AllDataModifiers) findMethods(new AllDataModifiers(), annotation);
+    }
+
+    AggregateOfInvokables findMethods(AggregateOfInvokables instance, Class annotation) {
         for (Method method : testClass.getMethods()) {
             if (method.isAnnotationPresent(annotation)) {
-                allDataModifiers.add(method);
+                instance.add(method);
             }
         }
-        return allDataModifiers;
+        return instance;
+    }
+
+    AggregateOfInvokables findClasses(AggregateOfInvokables instance, Class annotation) {
+        for (Class clazz : testClass.getClasses()) {
+            if (clazz.isAnnotationPresent(annotation)) {
+                instance.add(clazz);
+            }
+        }
+        return instance;
     }
 }
