@@ -1,3 +1,6 @@
+Information
+-----------
+
 1. junita runs nested jUnit tests
 
 2. junita is a derivative of jUnit, the source of which can be found from http://www.junit.org
@@ -9,3 +12,9 @@
 5. The class to start with when reading the code is Enclosure inside the file Enclosure.java
 
 6. Take a look at TestClassWithMultipleTests.java for a sample usage of the enclosed tests
+
+7. The unit tests are also intended to provide documentation for the respective classes
+
+8. Comments and questions can be sent to narainbalaji[attherate[at]][GmAil][dot[.]]com
+
+9. It will be helpful is such queries had the word junita in the subject
