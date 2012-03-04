@@ -1,1 +1,7 @@
-junita runs nested jUnit tests
+1. junita runs nested jUnit tests
+
+2. junita is a derivative of jUnit, the source of which can be found from http://www.junit.org
+
+3. The source code for junita https://github.com/balajin/junita
+
+4. junita is licensed under COMMON PUBLIC LICENSE v 1.0, a copy of which can be found in the source root
