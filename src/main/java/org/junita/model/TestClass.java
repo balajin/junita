@@ -1,24 +1,17 @@
-package org.junita.core;
+package org.junita.model;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.Description;
-import org.junita.model.AggregateOfInvokables;
-import org.junita.model.AllDataModifiers;
-import org.junita.model.AllTestMembers;
-import org.junita.model.AllTestMethods;
-
-import java.lang.reflect.Method;
 
 /**
  * Models a class under test.
- *
+ * <p/>
  * Is an aggregate of
- *
- *      1. All test methods
- *      2. All test members - Enclosed tests
- *      3. All data modifiers - Setup and Teardown methods
+ * <p/>
+ * 1. All test methods
+ * 2. All enclosed tests
+ * 3. All data modifiers - Setup and Teardown methods
  *
  * @author : Balaji Narain
  */
@@ -57,18 +50,18 @@ public class TestClass {
 
     public void describe(Description suiteDescription) {
         allTestMethods().describe(suiteDescription, clazz());
-        allTestMembers().describe(suiteDescription, clazz());
+        allEnclosedTests().describe(suiteDescription, clazz());
     }
 
-    AllTestMethods allTestMethods() {
+    public AllTestMethods allTestMethods() {
         return new AllTestMethods(this);
     }
 
-    AllTestMembers allTestMembers() {
-        return new AllTestMembers(this);
+    public AllEnclosedTests allEnclosedTests() {
+        return new AllEnclosedTests(this);
     }
 
-    AllDataModifiers allDataModifiers(Class annotation) {
+    public AllDataModifiers allDataModifiers(Class annotation) {
         return new AllDataModifiers(this, annotation);
     }
 }

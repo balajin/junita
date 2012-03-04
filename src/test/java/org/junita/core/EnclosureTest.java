@@ -6,8 +6,9 @@ import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junita.model.AllDataModifiers;
-import org.junita.model.AllTestMembers;
+import org.junita.model.AllEnclosedTests;
 import org.junita.model.AllTestMethods;
+import org.junita.model.TestClass;
 import org.junita.testdata.TestClassWithMultipleTests;
 import org.mockito.Mock;
 
@@ -28,7 +29,7 @@ public class EnclosureTest {
     @Mock
     private AllDataModifiers allDataModifiers;
     @Mock
-    private AllTestMembers allTestMembers;
+    private AllEnclosedTests allEnclosedTests;
 
     @Mock
     private RunNotifier notifier;
@@ -42,7 +43,7 @@ public class EnclosureTest {
 
         enclosure = new Enclosure(testClass);
         when(testClass.allTestMethods()).thenReturn(allTestMethods);
-        when(testClass.allTestMembers()).thenReturn(allTestMembers);
+        when(testClass.allEnclosedTests()).thenReturn(allEnclosedTests);
     }
 
     @Test
@@ -59,9 +60,9 @@ public class EnclosureTest {
     }
 
     @Test
-    public void shouldRunAllTestMembers() throws Exception {
-        when(allTestMembers.isNotEmpty()).thenReturn(true);
+    public void shouldRunAllEnclosedTests() throws Exception {
+        when(allEnclosedTests.isNotEmpty()).thenReturn(true);
         enclosure.run(notifier);
-        verify(allTestMembers).run(testClass, notifier);
+        verify(allEnclosedTests).run(testClass, notifier);
     }
 }

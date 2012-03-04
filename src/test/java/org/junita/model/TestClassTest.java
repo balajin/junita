@@ -1,4 +1,4 @@
-package org.junita.core;
+package org.junita.model;
 
 import org.junit.After;
 import org.junit.Before;
@@ -27,9 +27,9 @@ public class TestClassTest {
     }
 
     @Test
-    public void shouldReturnEmptyTestMembersForAClassWithNoMembers() {
+    public void shouldReturnEmptyEnclosedTests() {
         testClass = new TestClass(TestClassWithNoTests.class);
-        assertTrue(testClass.allTestMembers().isEmpty());
+        assertTrue(testClass.allEnclosedTests().isEmpty());
     }
 
     @Test
@@ -39,9 +39,9 @@ public class TestClassTest {
     }
 
     @Test
-    public void shouldReturnAllTestMembersOfAClass() {
+    public void shouldReturnAllEnclosedTests() {
         testClass = new TestClass(TestClassWithMultipleTests.class);
-        assertEquals(1, testClass.allTestMembers().size());
+        assertEquals(1, testClass.allEnclosedTests().size());
     }
 
     @Test

@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
-import org.junita.core.TestClass;
 import org.junita.testdata.TestClassWithMultipleTests;
+import org.junita.util.TargetProxy;
 import org.mockito.Mock;
 
 import java.lang.reflect.InvocationTargetException;

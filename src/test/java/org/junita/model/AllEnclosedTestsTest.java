@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junita.core.Enclosure;
-import org.junita.core.TestClass;
 import org.junita.testdata.TestClassWithMultipleTests;
 import org.mockito.Mock;
 
@@ -18,7 +17,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * @author : Balaji Narain
  */
-public class AllTestMembersTest {
+public class AllEnclosedTestsTest {
 
     @Mock
     private Enclosure enclosure;
@@ -28,43 +27,43 @@ public class AllTestMembersTest {
     private TestClass enclosingClass;
 
     private Class<?> enclosedTest;
-    private AllTestMembers allTestMembers;
+    private AllEnclosedTests allEnclosedTests;
 
-    public AllTestMembersTest() {
+    public AllEnclosedTestsTest() {
         enclosedTest = TestClassWithMultipleTests.InnerTest.class;
     }
 
     @Before
     public void setup() {
         initMocks(this);
-        allTestMembers = new AllTestMembers(enclosure);
+        allEnclosedTests = new AllEnclosedTests(enclosure);
         when(enclosingClass.clazz()).thenReturn(TestClassWithMultipleTests.class);
     }
 
     @Test
     public void shouldDescribeTheEnclosedTest() {
         Description suiteDescription = mock(Description.class);
-        allTestMembers.add(enclosedTest);
+        allEnclosedTests.add(enclosedTest);
 
-        allTestMembers.describe(suiteDescription, TestClassWithMultipleTests.class);
+        allEnclosedTests.describe(suiteDescription, TestClassWithMultipleTests.class);
         verify(suiteDescription, times(1)).addChild(any(Description.class));
     }
 
     @Test
     public void shouldRecursivelyRunEnclosedTest() throws Exception {
-        allTestMembers.add(enclosedTest);
+        allEnclosedTests.add(enclosedTest);
         when(enclosingClass.newInstance()).thenReturn(new TestClassWithMultipleTests());
 
-        allTestMembers.run(enclosingClass, notifier);
+        allEnclosedTests.run(enclosingClass, notifier);
         verify(enclosure, times(1)).run(same(notifier));
     }
 
     @Test
     public void shouldDestroyTheInstanceAfterTest() throws Exception {
-        allTestMembers.add(enclosedTest);
+        allEnclosedTests.add(enclosedTest);
         when(enclosingClass.newInstance()).thenReturn(new TestClassWithMultipleTests());
 
-        allTestMembers.run(enclosingClass, notifier);
+        allEnclosedTests.run(enclosingClass, notifier);
         verify(enclosingClass).destroy(anyObject());
     }
 }

@@ -5,22 +5,22 @@ import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junita.core.EnclosedTest;
 import org.junita.core.Enclosure;
-import org.junita.core.TestClass;
+import org.junita.model.collection.TargetAggregate;
 
 /**
  * A collection of all enclosed tests
  *
  * @author : Balaji Narain
  */
-public class AllTestMembers extends TargetAggregate<Class<?>> {
+public class AllEnclosedTests extends TargetAggregate<Class<?>> {
 
     private Enclosure enclosure;
 
-    public AllTestMembers() {
+    public AllEnclosedTests() {
         super();
     }
 
-    public AllTestMembers(TestClass testClass) {
+    public AllEnclosedTests(TestClass testClass) {
         for (Class clazz : testClass.clazz().getClasses()) {
             if (clazz.isAnnotationPresent(EnclosedTest.class)) {
                 this.add(clazz);
@@ -28,7 +28,7 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
         }
     }
 
-    public AllTestMembers(Enclosure enclosure) {
+    public AllEnclosedTests(Enclosure enclosure) {
         this.enclosure = enclosure;
     }
 

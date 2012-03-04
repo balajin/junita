@@ -1,4 +1,4 @@
-package org.junita.model;
+package org.junita.util;
 
 
 import java.lang.reflect.InvocationTargetException;

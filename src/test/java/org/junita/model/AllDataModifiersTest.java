@@ -3,6 +3,7 @@ package org.junita.model;
 import org.junit.Before;
 import org.junit.Test;
 import org.junita.testdata.TestClassWithMultipleTests;
+import org.junita.util.TargetProxy;
 import org.mockito.Mock;
 
 import java.lang.reflect.Method;

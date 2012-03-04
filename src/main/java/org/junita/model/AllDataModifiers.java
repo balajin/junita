@@ -1,6 +1,7 @@
 package org.junita.model;
 
-import org.junita.core.TestClass;
+import org.junita.model.collection.AggregateOfInvokables;
+import org.junita.util.TargetProxy;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

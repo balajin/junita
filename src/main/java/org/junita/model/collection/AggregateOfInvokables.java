@@ -1,4 +1,4 @@
-package org.junita.model;
+package org.junita.model.collection;
 
 import java.util.ArrayList;
 import java.util.List;

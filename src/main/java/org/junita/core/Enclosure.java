@@ -3,7 +3,8 @@ package org.junita.core;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
-import org.junita.model.TargetAggregate;
+import org.junita.model.collection.TargetAggregate;
+import org.junita.model.TestClass;
 
 /**
  *
@@ -38,7 +39,7 @@ public class Enclosure extends Runner {
     public void run(RunNotifier notifier) {
         try {
             run(testClass.allTestMethods(), notifier);
-            run(testClass.allTestMembers(), notifier);
+            run(testClass.allEnclosedTests(), notifier);
         } catch (Exception e) {
         }
     }
