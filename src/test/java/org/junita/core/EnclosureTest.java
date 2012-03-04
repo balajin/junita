@@ -1,13 +1,12 @@
-package org.junita;
+package org.junita.core;
 
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
-import org.junita.core.AllTestMembers;
-import org.junita.core.AllTestMethods;
-import org.junita.core.TestClass;
+import org.junita.model.AllTestMembers;
+import org.junita.model.AllTestMethods;
 import org.junita.testdata.TestClassWithMultipleTests;
 import org.mockito.Mock;
 
@@ -19,7 +18,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * @author: Balaji Narain
  */
-public class RecursiveRunnerTest {
+public class EnclosureTest {
 
     @Mock
     private TestClass testClass;
@@ -30,34 +29,34 @@ public class RecursiveRunnerTest {
     @Mock
     private RunNotifier notifier;
 
-    private RecursiveRunner recursiveRunner;
+    private Enclosure enclosure;
 
     @Before
     public void setup() {
         initMocks(this);
         when(testClass.clazz()).thenReturn(TestClassWithMultipleTests.class);
-        recursiveRunner = new RecursiveRunner(testClass);
+        enclosure = new Enclosure(testClass);
         when(testClass.allTestMethods()).thenReturn(allTestMethods);
         when(testClass.allTestMembers()).thenReturn(allTestMembers);
     }
 
     @Test
     public void shouldDescribeUnitUnderTest() {
-        recursiveRunner.getDescription();
+        enclosure.getDescription();
         verify(testClass).describe(any(Description.class));
     }
 
     @Test
     public void shouldRunAllTestMethods() throws Exception {
         when(allTestMethods.isNotEmpty()).thenReturn(true);
-        recursiveRunner.run(notifier);
+        enclosure.run(notifier);
         verify(allTestMethods).run(testClass, notifier);
     }
 
     @Test
     public void shouldRunAllTestMembers() throws Exception {
         when(allTestMembers.isNotEmpty()).thenReturn(true);
-        recursiveRunner.run(notifier);
+        enclosure.run(notifier);
         verify(allTestMembers).run(testClass, notifier);
     }
 }

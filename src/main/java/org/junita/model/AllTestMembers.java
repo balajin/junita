@@ -1,10 +1,10 @@
-package org.junita.core;
+package org.junita.model;
 
 
 import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
-import org.junita.RecursiveRunner;
-import sun.security.jca.GetInstance;
+import org.junita.core.Enclosure;
+import org.junita.core.TestClass;
 
 /**
  * @author : Balaji Narain
@@ -18,7 +18,7 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
     @Override
     public void describe(Description suiteDescription, Class clazz) {
         for (Class<?> target : testTargets) {
-            Description description = new RecursiveRunner(target).getDescription();
+            Description description = new Enclosure(target).getDescription();
             suiteDescription.addChild(description);
         }
     }
@@ -33,7 +33,7 @@ public class AllTestMembers extends TargetAggregate<Class<?>> {
     public boolean run(TestClass testClass, Object instance, RunNotifier notifier) throws Exception {
         for (Class<?> target : testTargets) {
             Object newInnerInstance = target.getConstructor(instance.getClass()).newInstance(instance);
-            new RecursiveRunner(target).run(newInnerInstance, notifier);
+            new Enclosure(target).run(newInnerInstance, notifier);
         }
         return true;
     }

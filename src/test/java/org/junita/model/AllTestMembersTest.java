@@ -1,4 +1,4 @@
-package org.junita.core;
+package org.junita.model;
 
 import org.junit.Test;
 

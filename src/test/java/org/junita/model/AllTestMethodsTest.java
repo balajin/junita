@@ -1,10 +1,13 @@
-package org.junita.core;
+package org.junita.model;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
+import org.junita.core.TestClass;
+import org.junita.model.AllTestMethods;
+import org.junita.model.TargetProxy;
 import org.junita.testdata.TestClassWithMultipleTests;
 import org.mockito.Mock;
 

@@ -3,15 +3,15 @@ package org.junita.testdata;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junita.EnclosedTest;
-import org.junita.RecursiveRunner;
+import org.junita.core.EnclosedTest;
+import org.junita.core.Enclosure;
 
 import static junit.framework.Assert.fail;
 
 /**
  * @author : Balaji Narain
  */
-@RunWith(RecursiveRunner.class)
+@RunWith(Enclosure.class)
 public class TestClassWithMultipleTests {
 
     public void emptyMethod() {

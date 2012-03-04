@@ -2,7 +2,8 @@ package org.junita.core;
 
 import org.junit.Test;
 import org.junit.runner.Description;
-import org.junita.EnclosedTest;
+import org.junita.model.AllTestMembers;
+import org.junita.model.AllTestMethods;
 
 import java.lang.reflect.Method;
 
@@ -30,7 +31,7 @@ public class TestClass {
         allTestMembers().describe(suiteDescription, clazz());
     }
 
-    public AllTestMethods allTestMethods() {
+    AllTestMethods allTestMethods() {
         AllTestMethods allTestMethods = new AllTestMethods();
         for (Method method : testClass.getMethods()) {
             if (method.isAnnotationPresent(Test.class)) {
@@ -40,7 +41,7 @@ public class TestClass {
         return allTestMethods;
     }
 
-    public AllTestMembers allTestMembers() {
+    AllTestMembers allTestMembers() {
         AllTestMembers allTestMembers = new AllTestMembers();
         for (Class innerClass : testClass.getClasses()) {
             if (innerClass.isAnnotationPresent(EnclosedTest.class)) {

@@ -1,4 +1,4 @@
-package org.junita;
+package org.junita.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

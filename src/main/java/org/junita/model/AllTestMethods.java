@@ -1,10 +1,11 @@
-package org.junita.core;
+package org.junita.model;
 
 
 import org.junit.Ignore;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
+import org.junita.core.TestClass;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

@@ -1,26 +1,24 @@
-package org.junita;
+package org.junita.core;
 
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
-import org.junita.core.AllTestMethods;
-import org.junita.core.TargetAggregate;
-import org.junita.core.TestClass;
+import org.junita.model.TargetAggregate;
 
 /**
  * @author : Balaji Narain
- *         <p/>
- *         TODO: Currently does not support running individual tests.
+ *
+ *   TODO: Currently does not support running individual tests.
  */
-public class RecursiveRunner extends Runner {
+public class Enclosure extends Runner {
 
     private TestClass testClass;
 
-    public RecursiveRunner(Class<?> testClass) {
+    public Enclosure(Class<?> testClass) {
         this(new TestClass(testClass));
     }
 
-    public RecursiveRunner(TestClass testClass) {
+    public Enclosure(TestClass testClass) {
         this.testClass = testClass;
     }
 
