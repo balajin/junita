@@ -4,11 +4,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>junita</groupId>
+    <groupId>com.wordpress.jiraaya.junita</groupId>
 
     <artifactId>junita</artifactId>
 
     <version>0.1</version>
+
+    <packaging>jar</packaging>
+    <name>junita</name>
+    <description>junita runs nested junit tests</description>
+    <url>https://github.com/balajin/junita</url>
+    <licenses>
+        <license>
+            <name>COMMON PUBLIC LICENSE v 1.0, Version 1.0</name>
+            <url>http://www.eclipse.org/legal/cpl-v10.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/balajin/junita</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>narainbalaji</id>
+            <name>Balaji Narain</name>
+            <email>narainbalaji@gmail.com</email>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>
