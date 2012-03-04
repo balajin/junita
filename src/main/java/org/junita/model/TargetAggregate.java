@@ -4,9 +4,6 @@ import org.junit.runner.Description;
 import org.junit.runner.notification.RunNotifier;
 import org.junita.core.TestClass;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author : Balaji Narain
  */

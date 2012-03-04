@@ -8,7 +8,6 @@ import org.junita.model.AllDataModifiers;
 import org.junita.model.AllTestMembers;
 import org.junita.model.AllTestMethods;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**

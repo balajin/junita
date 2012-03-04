@@ -22,10 +22,12 @@ public class TestClassWithMultipleTests {
 
     @Before
     public void setup() {
+
     }
 
     @Before
     public void anotherSetup() {
+
     }
 
     @Ignore
@@ -47,7 +49,7 @@ public class TestClassWithMultipleTests {
     }
 
     @Test
-    public void anotherTestMethod(){
+    public void anotherTestMethod() {
 
     }
 
