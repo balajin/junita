@@ -21,12 +21,12 @@ public class AllTestMethods extends TargetAggregate<Method> {
 
     private TargetProxy targetProxy;
 
-    public AllTestMethods() {
+    AllTestMethods() {
         super();
         targetProxy = new TargetProxy();
     }
 
-    public AllTestMethods(TestClass testClass) {
+    AllTestMethods(TestClass testClass) {
         this();
         for (Method method : testClass.clazz().getMethods()) {
             if (method.isAnnotationPresent(Test.class)) {

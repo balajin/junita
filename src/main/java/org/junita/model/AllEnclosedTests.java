@@ -16,11 +16,7 @@ public class AllEnclosedTests extends TargetAggregate<Class<?>> {
 
     private Enclosure enclosure;
 
-    public AllEnclosedTests() {
-        super();
-    }
-
-    public AllEnclosedTests(TestClass testClass) {
+    AllEnclosedTests(TestClass testClass) {
         for (Class clazz : testClass.clazz().getClasses()) {
             if (clazz.isAnnotationPresent(EnclosedTest.class)) {
                 this.add(clazz);

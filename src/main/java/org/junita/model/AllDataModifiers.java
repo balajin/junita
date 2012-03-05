@@ -15,11 +15,11 @@ public class AllDataModifiers extends AggregateOfInvokables<Method> {
 
     private TargetProxy targetProxy;
 
-    public AllDataModifiers() {
+    AllDataModifiers() {
         this(new TargetProxy());
     }
 
-    public AllDataModifiers(TestClass testClass, Class annotation) {
+    AllDataModifiers(TestClass testClass, Class annotation) {
         this();
         for (Method method : testClass.clazz().getMethods()) {
             if (method.isAnnotationPresent(annotation)) {
